@@ -3,11 +3,9 @@ package com.nuvissoft.notifications.notifications.Services;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -59,7 +57,6 @@ public class CreditServices implements ExcelRepository<Credits> {
     private Credits fillCreditObject(XSSFRow row) {
 
         XSSFCell cellPhoneNumber = row.getCell(7);
-        XSSFCell cell;
 
         cellPhoneNumber.setCellType(CellType.STRING);
         System.out.println(row.getCell(9).getCellType().name());

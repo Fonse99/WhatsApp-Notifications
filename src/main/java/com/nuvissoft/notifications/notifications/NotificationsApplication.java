@@ -1,5 +1,7 @@
 package com.nuvissoft.notifications.notifications;
 
+import java.util.GregorianCalendar;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,7 +10,7 @@ import com.nuvissoft.notifications.notifications.Services.WhatsAppSender;
 import com.twilio.type.PhoneNumber;
 
 import Data.Domain.Credits;
-import Data.Fake.FakeDataExamples;
+// import Data.Fake.FakeDataExamples;
 import io.github.cdimascio.dotenv.Dotenv;
 
 @SpringBootApplication
@@ -19,39 +21,38 @@ public class NotificationsApplication {
 	public static void main(String[] args) throws InterruptedException {
 		SpringApplication.run(NotificationsApplication.class, args);
 		// demoWhatsAppMessage();
-		// demoWhatsAppMessageWithExcel();
-		System.out.println(
-			environment.get("TWILIO_DEFAULT_MESSAGE")
-		);
+		demoWhatsAppMessageWithExcel();
 	}
 
 	static void demoWhatsAppMessage() throws InterruptedException {
+		
 		WhatsAppSender wsp = new WhatsAppSender();
-		FakeDataExamples data = new FakeDataExamples();
+		// FakeDataExamples data = new FakeDataExamples();
 
-		while (true) {
+		// while (true) {
 
-			Thread.sleep(3000);
+		// 	Thread.sleep(3000);
 
-			for (Credits crdt : data.getAllCredits()) {
+		// 	for (Credits crdt : data.getAllCredits()) {
 
-				wsp.setReceiverPhone(new PhoneNumber(
-						"whatsapp:" + crdt.getPhoneNumber()));
+		// 		wsp.setReceiverPhone(new PhoneNumber(
+		// 				"whatsapp:" + crdt.getPhoneNumber()));
 
-				wsp.setMessageBody(
-						"Estimado "
-								+ ((crdt.getGender() == 'M') ? "sr. " : "sra. ")
-								+ crdt.getFirstName()
-								+ ", se le informa que tiene un monto pendiente de cancelación de "
-								+ crdt.getAmount()
-								+ " que venció en la fecha: "
-								+ crdt.getDueDate().toString()
-								+ "\nPorfavor le recomendamos realizar la cancelación o abono del mismo lo antes posible para evitar cargos moratorios."
-								+ "\nRemitente: Gasolinera Jireh");
-				wsp.send();
-			}
+		// 		wsp.setMessageBody(
+		// 				"Estimado(a) "
+		// 						+ "sr(a)"
+		// 						+ crdt.getFirstName()
+		// 						+ ", se le informa que tiene un monto pendiente de cancelación de "
+		// 						+ crdt.getAmount()
+		// 						+ " que venció en la fecha: "
+		// 						+ new GregorianCalendar()
+		// 						+ "\nPorfavor le recomendamos realizar la cancelación o abono del mismo lo antes posible para evitar cargos moratorios."
+		// 						+ "\nRemitente: Gasolinera Jireh");
+		// 		wsp.send();
+		// 	}
 
-		}
+		// }
+	
 	}
 
 	static void demoWhatsAppMessageWithExcel(){
@@ -59,7 +60,7 @@ public class NotificationsApplication {
 
 		service.getAllCreditsWithLate().forEach(e -> {
 			System.out.println( "\n" + e);
-		});;
+		});
 
 	}
 }

@@ -3,66 +3,85 @@ package com.nuvissoft.notifications.notifications.Services;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import Data.Domain.Credits;
 import Data.Repositories.ExcelRepository;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class CreditServices implements ExcelRepository<Credits> {
+    Dotenv environment = Dotenv.load();
 
-    String filePath = "Jireh Testing (1).xlsx";
+    String filePath = environment.get("XLSX_PATH_FILE");
     FileInputStream excelFile;
     List<Credits> allCredits;
+
     XSSFWorkbook creditBook;
     XSSFSheet sheet;
-    // CellFormat cellFormat = new CellFormat();
 
     @Override
     public List<Credits> getAllCreditsWithLate() {
+
         this.allCredits = new ArrayList<Credits>();
+
         try {
 
             this.excelFile = new FileInputStream(this.filePath);
             this.creditBook = new XSSFWorkbook(excelFile);
             this.sheet = this.creditBook.getSheetAt(0);
-            Iterator<Row> iterator = sheet.iterator();
-            Row currentRow;
+            XSSFRow xssfRow;
 
-            //To avoid titles
-            iterator.next();
-            System.out.println("Total Rows amount: " + (sheet.getLastRowNum() - 1));
+            for (int rowIndex = 1; rowIndex < this.sheet.getLastRowNum() - 1; rowIndex++) {
 
-            while (iterator.hasNext()) {
+                xssfRow = this.sheet.getRow(rowIndex);
+                this.allCredits.add(this.fillCreditObject(xssfRow));
 
-                currentRow = iterator.next();
-                if (currentRow.getCell(0) != null) {
-
-                    this.allCredits.add(
-                            new Credits(
-                                    0,
-                                    currentRow.getCell(0).toString(),
-                                    currentRow.getCell(1).toString(),
-                                    Double.parseDouble(currentRow.getCell(5).toString()),
-                                    new GregorianCalendar().getTime(),
-                                    currentRow.getCell(6).toString(),
-                                    currentRow.getCell(7).toString(),
-                                    currentRow.getCell(2).toString().charAt(0)));
-
-                }
             }
 
         } catch (IOException notFounded) {
+
             System.err.println(notFounded.getLocalizedMessage());
+
             notFounded.printStackTrace();
+
         }
 
         return this.allCredits;
+    }
+
+    private Credits fillCreditObject(XSSFRow row) {
+
+        XSSFCell cellPhoneNumber = row.getCell(7);
+        XSSFCell cell;
+
+        cellPhoneNumber.setCellType(CellType.STRING);
+        System.out.println(row.getCell(9).getCellType().name());
+
+        Credits credit;
+
+        credit = new Credits(
+                row.getCell(0).getStringCellValue(),
+                row.getCell(1).getStringCellValue(),
+                row.getCell(2).getStringCellValue(),
+                row.getCell(3).getStringCellValue(),
+                row.getCell(4).getStringCellValue(),
+                row.getCell(5).getStringCellValue(),
+                row.getCell(6).getStringCellValue(),
+                cellPhoneNumber.getStringCellValue(),
+                Integer.parseInt(
+                        row.getCell(8).getRawValue()),
+                Double.parseDouble(
+                        row.getCell(9).getRawValue()));
+
+        return credit;
+
     }
 
 }

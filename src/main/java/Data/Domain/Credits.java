@@ -10,13 +10,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Credits {
-    int id;
+    String id;
     String firstName;
     String lastName;
-    double amount;
-    Date dueDate;
+    String ruc;
+    String address;
+    String city;
+    String state;
     String phoneNumber;
-    String email;
-    char gender;
+    int term;
+    double amount;
+    // Date dueDate;
+    // String email;
+    // char gender;
 
 }

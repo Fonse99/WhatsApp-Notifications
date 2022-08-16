@@ -8,14 +8,13 @@ import com.nuvissoft.notifications.notifications.Services.CreditServices;
 import com.nuvissoft.notifications.notifications.Services.WhatsAppSender;
 import com.twilio.type.PhoneNumber;
 
+import Utilities.Environment;
 // import Data.Fake.FakeDataExamples;
 import io.github.cdimascio.dotenv.Dotenv;
 
 @SpringBootApplication
 public class NotificationsApplication {
-
-	static Dotenv environment = Dotenv.load();
-
+	
 	public static void main(String[] args) throws InterruptedException {
 		SpringApplication.run(NotificationsApplication.class, args);
 		WhatsAppSender whatsApp = new WhatsAppSender();
@@ -24,7 +23,7 @@ public class NotificationsApplication {
 
 	static void demoWhatsAppMessageWithExcel(WhatsAppSender whatsApp) {
 		CreditServices service = new CreditServices();
-		String messageTemplate = "Estimado sr(a). NOMBRE se informa que tiene un saldo pendiente de C$ MONTO. Por lo que se le invita a cancelar el mismo lo antes posible. OBSERVACION";
+		String messageTemplate = Environment.env.get("TWILIO_CUSTOM_MESSAGE");
 
 		service
 				.getAllCreditsWithLate()

@@ -12,12 +12,11 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import Data.Domain.Credits;
 import Data.Repositories.ExcelRepository;
-import io.github.cdimascio.dotenv.Dotenv;
+import Utilities.Environment;
 
 public class CreditServices implements ExcelRepository<Credits> {
-    Dotenv environment = Dotenv.load();
 
-    String filePath = environment.get("XLSX_PATH_FILE");
+    String filePath = Environment.env.get("XLSX_PATH_FILE");
     FileInputStream excelFile;
     List<Credits> allCredits;
 

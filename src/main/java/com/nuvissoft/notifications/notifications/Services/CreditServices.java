@@ -36,7 +36,7 @@ public class CreditServices implements ExcelRepository<Credits> {
             this.sheet = this.creditBook.getSheetAt(0);
             XSSFRow xssfRow;
 
-            for (int rowIndex = 1; rowIndex < this.sheet.getLastRowNum() - 1; rowIndex++) {
+            for (int rowIndex = 1; rowIndex <= this.sheet.getLastRowNum(); rowIndex++) {
 
                 xssfRow = this.sheet.getRow(rowIndex);
                 this.allCredits.add(this.fillCreditObject(xssfRow));

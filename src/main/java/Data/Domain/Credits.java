@@ -20,8 +20,13 @@ public class Credits {
     String phoneNumber;
     int term;
     double amount;
-    // Date dueDate;
-    // String email;
-    // char gender;
 
+    @Override
+    public String toString() {
+        return new StringBuilder("\n\nNombre: ")
+                .append(this.firstName).append(" ").append(this.lastName)
+                .append("\t\nMonto: C$ ").append(this.amount)
+                .append("")
+                .toString();
+    }
 }

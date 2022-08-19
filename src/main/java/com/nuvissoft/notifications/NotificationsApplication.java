@@ -5,9 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.nuvissoft.notifications.Services.CreditServices;
 import com.nuvissoft.notifications.Services.WhatsAppSender;
+import com.nuvissoft.notifications.Utilities.Environment;
 import com.twilio.type.PhoneNumber;
 
-import Utilities.Environment;
+
 
 @SpringBootApplication
 public class NotificationsApplication {

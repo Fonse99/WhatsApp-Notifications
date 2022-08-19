@@ -1,10 +1,10 @@
 package com.nuvissoft.notifications.Services;
 
+import com.nuvissoft.notifications.Utilities.Environment;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
-import Utilities.Environment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,5 +1,4 @@
-package Data.Domain;
-
+package com.nuvissoft.notifications.Data.Domain;
 // import java.util.Date;
 
 import lombok.AllArgsConstructor;

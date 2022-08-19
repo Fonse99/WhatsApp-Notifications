@@ -1,4 +1,4 @@
-package Data.Repositories;
+package com.nuvissoft.notifications.Data.Repositories;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package Utilities;
+package com.nuvissoft.notifications.Utilities;
 
 import io.github.cdimascio.dotenv.Dotenv;
 

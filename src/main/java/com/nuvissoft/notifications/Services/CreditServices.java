@@ -48,7 +48,6 @@ public class CreditServices implements ExcelRepository<Credits> {
             System.err.println(notFounded.getLocalizedMessage());
 
             notFounded.printStackTrace();
-
         }
 
         return this.allCredits;

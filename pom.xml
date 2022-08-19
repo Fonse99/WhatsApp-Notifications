@@ -11,9 +11,9 @@
 	</parent>
 	<groupId>com.nuvissoft.notifications</groupId>
 	<artifactId>notifications</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>notifications</name>
-	<description>Demo project for Spring Boot</description>
+	<version>v1.0.0 ETAPA1</version>
+	<name>Notificiones Jireh</name>
+	<description>Sistema de notificaciones de cobro para la gasolinera Jireh</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

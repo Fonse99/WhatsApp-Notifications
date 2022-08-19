@@ -1,5 +1,7 @@
 package com.nuvissoft.notifications.Services;
 
+import org.springframework.stereotype.Service;
+
 import com.nuvissoft.notifications.Utilities.Environment;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
@@ -12,8 +14,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Service
 public class WhatsAppSender {
-
 
     public final String ACCOUNT_SID = Environment.env.get("TWILIO_ACCOUNT_SID");
     public final String AUTH_TOKEN = Environment.env.get("TWILIO_AUTH_TOKEN");

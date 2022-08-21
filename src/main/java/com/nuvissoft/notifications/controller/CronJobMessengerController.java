@@ -18,66 +18,68 @@ public class CronJobMessengerController {
 
 	@Scheduled(fixedDelayString = "${scheduling.duration.string.fixed}", initialDelayString = "${scheduling.daration.string.initial}")
 	public void sendPaymentsMessages() {
+
 		System.out.println("Ejecutado a las: " + new Date());
-		// CreditServices service = new CreditServices();
-		// String messageTemplate = Environment.env.get("TWILIO_CUSTOM_MESSAGE");
-		// String paymentReportMessage = Environment.env.get("PAYMENT_REPORT_MESSAGE");
-		// var notificationsSended = service.getAllCreditsWithLate();
 
-		// notificationsSended
-		// .forEach(e -> {
+		CreditServices service = new CreditServices();
+		String messageTemplate = Environment.env.get("TWILIO_CUSTOM_MESSAGE");
+		String paymentReportMessage = Environment.env.get("PAYMENT_REPORT_MESSAGE");
+		var notificationsSended = service.getAllCreditsWithLate();
 
-		// String finalMessage = messageTemplate
-		// .replace(
-		// "NOMBRE",
-		// e.getFirstName())
-		// .replace(
-		// "MONTO",
-		// String.valueOf(
-		// e.getAmount()))
-		// .replace(
-		// "OBSERVACION",
-		// "Este mensaje duró en llegar: " + (e.getTerm()) + " Sec")
-		// .replaceAll("[_*]", "\n");
+		notificationsSended
+				.forEach(e -> {
 
-		// whatsApp
-		// .setReceiverPhone(
-		// new PhoneNumber(
-		// "whatsapp:+505" + e.getPhoneNumber()));
+					String finalMessage = messageTemplate
+							.replace(
+									"NOMBRE",
+									e.getFirstName())
+							.replace(
+									"MONTO",
+									String.valueOf(
+											e.getAmount()))
+							.replace(
+									"OBSERVACION",
+									"Este mensaje duró en llegar: " + (e.getTerm()) + " Sec")
+							.replaceAll("[_*]", "\n");
 
-		// whatsApp
-		// .setMessageBody(
-		// finalMessage);
+					whatsApp
+							.setReceiverPhone(
+									new PhoneNumber(
+											"whatsapp:+505" + e.getPhoneNumber()));
 
-		// try {
-		// System.out.println(
-		// "Thread is sleeping... by " + (e.getTerm()) + " Sec");
+					whatsApp
+							.setMessageBody(
+									finalMessage);
 
-		// Thread.sleep(Long.valueOf(1000));
+					try {
+						System.out.println(
+								"Thread is sleeping... by " + (e.getTerm()) + " Sec");
 
-		// } catch (InterruptedException e1) {
-		// e1.printStackTrace();
-		// }
-		// whatsApp
-		// .send();
-		// System.out.println(finalMessage);
-		// });
+						Thread.sleep(Long.valueOf(1000));
 
-		// whatsApp.setReceiverPhone(
-		// new PhoneNumber(
-		// Environment.env.get("PHONE_TO_SEND_REPORT")));
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+					whatsApp
+							.send();
+					System.out.println(finalMessage);
+				});
 
-		// paymentReportMessage = paymentReportMessage
-		// .replace(
-		// "COBROS",
-		// notificationsSended.toString().replaceAll("[\\[\\]]", ""));
+		whatsApp.setReceiverPhone(
+				new PhoneNumber(
+						Environment.env.get("PHONE_TO_SEND_REPORT")));
 
-		// whatsApp.setMessageBody(
-		// paymentReportMessage);
+		paymentReportMessage = paymentReportMessage
+				.replace(
+						"COBROS",
+						notificationsSended.toString().replaceAll("[\\[\\]]", ""));
 
-		// System.out.println(paymentReportMessage);
+		whatsApp.setMessageBody(
+				paymentReportMessage);
 
-		// whatsApp.send();
+		System.out.println(paymentReportMessage);
+
+		whatsApp.send();
 
 	}
 

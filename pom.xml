@@ -15,7 +15,7 @@
 	<name>Notificiones Jireh</name>
 	<description>Sistema de notificaciones de cobro para la gasolinera Jireh</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -66,6 +66,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>Notif-Jireh-v1.0</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

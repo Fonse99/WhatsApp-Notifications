@@ -43,6 +43,9 @@ public class CreditServices implements ExcelRepository<Credits> {
 
             }
 
+            this.creditBook.close();
+            this.excelFile.close();
+
         } catch (IOException notFounded) {
 
             System.err.println(notFounded.getLocalizedMessage());
